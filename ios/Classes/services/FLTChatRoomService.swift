@@ -499,6 +499,7 @@ class FLTChatRoomService: FLTBaseService, FLTService {
     
     //聊天室队列
     private func fetchChatroomQueue(_ arguments: [String : Any], _ resultCallback: ResultCallback){
+        print("ios native fetchChatroomQueue")
         guard let roomId = getRoomId(arguments) else {
             errorCallBack(resultCallback, "parameter is error")
             return
@@ -506,7 +507,13 @@ class FLTChatRoomService: FLTBaseService, FLTService {
         
         weak var weakSelf = self
         NIMSDK.shared().chatroomManager.fetchChatroomQueue(roomId) { error, data in
-            weakSelf?.chatroomCallback(error, ["entryList": data], resultCallback)
+            var mapList = [[String: String]]()
+            data?.forEach({ maps in
+                maps.forEach { (key: String, value: String) in
+                    mapList.append(["key": key, "value": value])
+                }
+            })
+            weakSelf?.chatroomCallback(error, ["entryList": mapList], resultCallback)
         }
     }
     

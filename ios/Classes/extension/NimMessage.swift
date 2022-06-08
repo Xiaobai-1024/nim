@@ -622,7 +622,8 @@ extension NIMMessage {
                         target["content"] = obj[NIMChatroomEventInfoQueueChangeItemValueKey]
                         target["contentMap"] = obj[NIMChatroomEventInfoQueueChangeItemsKey]
                         if let queueChangeType = obj[NIMChatroomEventInfoQueueChangeTypeKey] as? Int, let roomChangeQueueType = NIMChatroomQueueChangeType.init(rawValue: queueChangeType) {
-                            target["queueChangeType"] = roomChangeQueueType.rawValue
+                            let flt_Type = FLT_NIMChatroomQueueChangeType.convert(roomChangeQueueType)
+                            target["queueChangeType"] = flt_Type.rawValue
                         }else {
                             target["queueChangeType"] = FLT_NIMChatroomQueueChangeType.undefined.rawValue
                         }
@@ -631,7 +632,8 @@ extension NIMMessage {
                     if let obj = chatroomNotify.ext as? [String:Any] {
                         target["contentMap"] = obj[NIMChatroomEventInfoQueueChangeItemsKey]
                         if let queueChangeType = obj[NIMChatroomEventInfoQueueChangeTypeKey] as? Int, let roomChangeQueueType = NIMChatroomQueueChangeType.init(rawValue: queueChangeType) {
-                            target["queueChangeType"] = roomChangeQueueType.rawValue
+                            let flt_Type = FLT_NIMChatroomQueueChangeType.convert(roomChangeQueueType)
+                            target["queueChangeType"] = flt_Type.rawValue
                         }else {
                             target["queueChangeType"] = FLT_NIMChatroomQueueChangeType.undefined.rawValue
                         }

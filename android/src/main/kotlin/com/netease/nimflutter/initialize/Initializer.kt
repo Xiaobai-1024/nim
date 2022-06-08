@@ -175,5 +175,7 @@ fun SDKOptions.configureWithMap(configurations: Map<String, *>) = apply {
     if (notificationConfig != null) {
         statusBarNotificationConfig = convertToStatusBarNotificationConfig(notificationConfig)
     }
+    //状态对齐ios
+    enableLoseConnection = true
 
 }
